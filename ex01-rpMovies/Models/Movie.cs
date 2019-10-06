@@ -10,7 +10,7 @@ namespace ex01_rpMovies.Models
     {
         public int ID { get; set; }
         
-        public int Title { get; set; }
+        public string Title { get; set; }
         
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
