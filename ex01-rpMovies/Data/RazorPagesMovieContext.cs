@@ -13,7 +13,7 @@ namespace ex01_rpMovies.Models
         {
         }
 
-        DbSet<Movie> Movies { get; set; }
+        public DbSet<Movie> Movies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
