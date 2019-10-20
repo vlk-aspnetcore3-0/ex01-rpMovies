@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +25,14 @@ namespace ex01_rpMovies
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddDbContextPool<Models.RazorPagesMovieContext>(
+                options => options.UseMySql(Configuration.GetConnectionString("SchoolContext"),
+                    mySqlOptions =>
+                    {
+                        mySqlOptions.ServerVersion(new Version(8, 0, 18), Pomelo.EntityFrameworkCore.MySql.Infrastructure.ServerType.MySql);
+                    }
+            ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
