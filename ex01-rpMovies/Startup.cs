@@ -26,8 +26,13 @@ namespace ex01_rpMovies
         {
             services.AddRazorPages();
 
-            services.AddDbContext<Models.RazorPagesMovieContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("SchoolContext")));
+            services.AddDbContextPool<Models.RazorPagesMovieContext>(
+                options => options.UseMySql(Configuration.GetConnectionString("SchoolContext"),
+                    mySqlOptions =>
+                    {
+                        mySqlOptions.ServerVersion(new Version(8, 0, 18), Pomelo.EntityFrameworkCore.MySql.Infrastructure.ServerType.MySql);
+                    }
+            ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
